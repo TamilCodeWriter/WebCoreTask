@@ -1,0 +1,96 @@
+﻿@model EmployeeViewModel
+
+<h2>Manage Employees</h2>
+
+<div>
+    <h3>Add/Edit Employee</h3>
+    <form asp-action="SaveEmployee" asp-controller="Employee" method="post">
+        <input type="hidden" asp-for="Employee.Id" />
+        <div class="form-group">
+            <label asp-for="Employee.Name"></label>
+            <input asp-for="Employee.Name" class="form-control" />
+            <span asp-validation-for="Employee.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Employee.Position"></label>
+            <input asp-for="Employee.Position" class="form-control" />
+            <span asp-validation-for="Employee.Position" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Employee.Salary"></label>
+            <input asp-for="Employee.Salary" class="form-control" />
+            <span asp-validation-for="Employee.Salary" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-secondary">Clear</button>
+    </form>
+</div>
+
+<hr />
+
+<div>
+    <h3>Employee List</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model == null || Model.Employees == null || !Model.Employees.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center">No employees found.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    <td>@employee.Id</td>
+                    <td>@employee.Name</td>
+                    <td>@employee.Position</td>
+                    <td>@employee.Salary</td>
+                        <td>
+                        <button class="btn btn-primary" onclick="editEmployee(@employee.Id)">Edit</button>
+                        <form asp-action="SaveEmployee" method="post" style="display:inline;">
+                            <input type="hidden" name="Id" value="@employee.Id" />
+                            <input type="hidden" id="Action" name="Action" value="Delete" />
+                            <button type="submit" class="btn btn-danger" onclick="setAction('Delete')">Delete</button>
+                        </form>
+                      </td>
+                       
+                </tr>
+            }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts {
+    <script>
+        function setAction(action) {
+            document.getElementById('Action').value = action;
+        }
+
+        function editEmployee(id) {
+            $.ajax({
+                url: '@Url.Action("GetEmployee")/' + id,
+                type: 'GET',
+                success: function (data) {
+                    $('#Employee_Id').val(data.id);
+                    $('#Employee_Name').val(data.name);
+                    $('#Employee_Position').val(data.position);
+                    $('#Employee_Salary').val(data.salary);
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,27 @@
+﻿@model User
+
+<form asp-action="Login" method="post">
+    
+    <div class="row mb-2">
+        <div class="col-sm-2">
+            <label for="Username">Username</label>
+        </div>
+        <div class="col-sm-1">
+            <input type="text" id="Username" name="Username" required />
+        </div>
+    </div>
+    <div class="row mb-2">
+
+        <div class="col-sm-2">
+            <label for="Password">Password</label>
+        </div>
+        <div class="col-sm-1">
+        <input type="password" id="Password" name="Password" required />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm-3">
+            <button type="submit">Login</button>
+        </div>
+    </div>
+</form>

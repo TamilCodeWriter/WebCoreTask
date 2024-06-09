@@ -1,0 +1,54 @@
+﻿@using WebCoreTask.Models;
+
+@model DBViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+</head>
+<body>
+    <h1>Data from First Database</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <!-- Other columns -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DataFromFirstDb)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.FirstName</td>
+                    <!-- Other columns -->
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h1>Data from Second Database</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <!-- Other columns -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DataFromSecondDb)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.FirstName</td>
+                    <!-- Other columns -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
