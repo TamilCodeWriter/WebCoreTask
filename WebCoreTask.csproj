@@ -21,4 +21,8 @@
     <ProjectReference Include="..\CompanyDetailService\CompanyDetailService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Test\" />
+  </ItemGroup>
+
 </Project>
