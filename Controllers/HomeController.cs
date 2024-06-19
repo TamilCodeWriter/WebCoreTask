@@ -1,7 +1,10 @@
 using CompanyDetailService;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Formats.Asn1;
+using WebCoreTask.Class;
 using WebCoreTask.Models;
+
 
 namespace WebCoreTask.Controllers
 {
@@ -15,13 +18,15 @@ namespace WebCoreTask.Controllers
             _logger = logger;
             _Companyinfo = cInfo;
         }
-       
+      
         public IActionResult Index()
         {
-            
-          
+            MyTask mytaks = new MyTask();
+            //mytaks.ReverseString();
+            mytaks.ReverseStringDF();
             TempData["CompanyName"] = _Companyinfo.CompanyName;
             return View();
+
         }
 
         public IActionResult Privacy()
