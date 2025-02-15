@@ -7,6 +7,7 @@ using OfficeOpenXml;
 using System.Text;
 using WebCoreTask.Data;
 using CompanyDetailService;
+using WebCoreTask.MyMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,7 +75,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseMiddleware<SimpleMiddleware>();
+app.UseMiddleware<CustomMiddleware>();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
